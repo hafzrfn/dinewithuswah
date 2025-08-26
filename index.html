@@ -6,23 +6,28 @@
     <title>Dine with Uswah - Cake Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url(fonts/CormorantGaramond-Medium.ttf)
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'CustomFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
             --primary: #F9E3BA;
-            --secondary: #7e4e5c;
-            --accent: #F9E3BA;
+            --secondary: #31749e;
+            --accent: #1E3A4C;
             --light: #fff8f8;
             --dark: #3c2a2e;
         }
 
         body {
-            background-color: var(--light);
+            background-color: #fff6e7;
             color: var(--dark);
             line-height: 1.6;
             padding-top: 50px; /* Account for fixed navbar */
@@ -34,7 +39,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: white;
+            background: #fff6e7;
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
@@ -55,16 +60,19 @@
             color: var(--secondary);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary);
+        .logonavbar {
+            width: 70px;
         }
 
         .nav-right {
             display: flex;
             align-items: center;
             gap: 1.5rem;
+            font-size: 20px;
+        }
+
+        .nav-right button{
+            
         }
 
         .search-box {
@@ -111,11 +119,11 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: linear-gradient(135deg, #F9E3BA, #fdd58b);
             padding: 3rem 1.5rem 1.5rem;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-top: 0;
+            margin-top: 40px;
         }
 
         .header-logo {
@@ -129,7 +137,7 @@
         .tagline {
             font-style: italic;
             color: rgb(49, 48, 48);
-            font-size: 1.1rem;
+            font-size: 1.4rem;
         }
 
         .container {
@@ -145,7 +153,7 @@
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.3rem;
             margin-top: 2rem;
             position: relative;
             display: inline-block;
@@ -173,7 +181,7 @@
         .intro {
             text-align: center;
             margin: 2rem 0;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             line-height: 1.8;
             max-width: 800px;
             margin-left: auto;
@@ -202,7 +210,7 @@
 
         .product-img {
             height: 200px;
-            background: linear-gradient(45deg, #f8b5c1, #fad0c4);
+            background: linear-gradient(45deg, #F9E3BA, #F9E3BA);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -210,12 +218,20 @@
             font-size: 4rem;
         }
 
+        .bananapuddingimg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .product-content {
+
             padding: 1.5rem;
+            
         }
 
         .product-title {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             color: var(--secondary);
             margin-bottom: 0.5rem;
         }
@@ -223,7 +239,7 @@
         .product-desc {
             color: #666;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
+            font-size: 1.1rem;
         }
 
         .product-price {
@@ -233,7 +249,7 @@
         }
 
         .about {
-            background: linear-gradient(to right, #fff8f8, #fdeff2);
+            background: linear-gradient(to right, #F9E3BA, #F9E3BA);
             padding: 3rem 2rem;
             border-radius: 15px;
             margin: 3rem 0;
@@ -282,7 +298,7 @@
         .contact-item {
             text-align: center;
             padding: 1.5rem;
-            background: #fff8f8;
+            background: #F9E3BA;;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
@@ -315,6 +331,22 @@
             gap: 10px;
             animation: slideIn 0.5s ease;
             z-index: 1001;
+        }
+
+        .ordernow-button button {
+            font-size: 1rem;
+            background: #F9E3BA;
+            color: black;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .ordernow-button button:hover {
+            background: var(--secondary);
         }
 
         @keyframes slideIn {
@@ -423,21 +455,20 @@
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
-            <div class="logo">Dine with Uswah</div>
+            <div class="logo"><img src="images/bgmremoved.png" class="logonavbar"></div>
         </div>
         <div class="nav-right">
-            <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class="fas fa-search"></i>
+            <div class="home-tab">
+                <a href="" style="text-decoration: none; color: black">Home</a>
             </div>
-            <div class="nav-icon">
-                <i class="fas fa-user"></i>
-                <span class="icon-label">Sign In</span>
+            <div class="product-tab">
+                <a href="" style="text-decoration: none; color: black">Our Products</a>
             </div>
-            <div class="nav-icon" id="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">3</span>
-                <span class="icon-label">Cart</span>
+            <div class="aboutus-tab">
+                <a href="" style="text-decoration: none; color: black">Who We Are</a>
+            </div>
+            <div class="ordernow-button">
+                <button>Order Now</button>
             </div>
         </div>
     </nav>
@@ -467,7 +498,7 @@
 
     <header>
         <div>
-            <img src="logodine.jpg" alt="">
+            <img src="images/bgmremoved.png" alt="">
         </div>
         <div class="header-logo">Dine with Uswah</div>
         <div class="tagline">Crafted carefully with selected ingredients and refined recipes</div>
@@ -481,25 +512,25 @@
         <div class="products">
             <div class="product">
                 <div class="product-img">
-                    <i class="fas fa-cheese"></i>
+                    <img src="images/bananapuddingtray.jpg" class="bananapuddingimg">
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Domestic Milk Cake</h3>
-                    <p class="product-desc">Made with 2,000 miles of recycled vegetable ingredients for a fresh taste.</p>
-                    <div class="product-price">$25.00</div>
-                    <button class="btn add-to-cart">Add to Cart</button>
+                    <h3 class="product-title">Banana Pudding Tray</h3>
+                    <p class="product-desc">Creamy banana pudding layered with fresh bananas and soft wafers, topped with a smooth cream for a classic, comforting taste.</p>
+                    <div class="product-price">SGD 80.00</div>
+                    <button class="btn add-to-cart">Order Now</button>
                 </div>
             </div>
 
             <div class="product">
                 <div class="product-img">
-                    <i class="fas fa-birthday-cake"></i>
+                    <img src="images/bananapuddingminipan.jpg" class="bananapuddingimg">
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Your Travel Cake</h3>
-                    <p class="product-desc">Since 2023, our commitment to market stores has made this a favorite.</p>
-                    <div class="product-price">$12.00</div>
-                    <button class="btn add-to-cart">Add to Cart</button>
+                    <h3 class="product-title">Banana Pudding Mini Pan</h3>
+                    <p class="product-desc">Creamy banana pudding packed into convenient mini pans, layered with bananas and wafers for the perfect portion.</p>
+                    <div class="product-price">SGD 5.00</div>
+                    <button class="btn add-to-cart">Order Now</button>
                 </div>
             </div>
 
@@ -508,10 +539,10 @@
                     <i class="fas fa-pie"></i>
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Fruit Pie</h3>
-                    <p class="product-desc">Food drops that have been eaten by the cooks during their meal.</p>
+                    <h3 class="product-title">To be Announced</h3>
+                    <p class="product-desc">Lorem Ipsum</p>
                     <div class="product-price">$75.00</div>
-                    <button class="btn add-to-cart">Add to Cart</button>
+                    <button class="btn add-to-cart">Order Now</button>
                 </div>
             </div>
 
@@ -520,10 +551,10 @@
                     <i class="fas fa-wine-bottle"></i>
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Fruit & Steward Bottles</h3>
-                    <p class="product-desc">After a meal before feeding a tablespoon of sugar, we can use this bottle as a whole.</p>
+                    <h3 class="product-title">To be Announced</h3>
+                    <p class="product-desc">Lorem Ipsum</p>
                     <div class="product-price">$10.00</div>
-                    <button class="btn add-to-cart">Add to Cart</button>
+                    <button class="btn add-to-cart">Order Now</button>
                 </div>
             </div>
 
@@ -532,10 +563,10 @@
                     <i class="fas fa-cake"></i>
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Chocolate Pulcher - Anniversary 2023</h3>
-                    <p class="product-desc">A delicious and decadent chocolate cake for your special celebrations.</p>
+                    <h3 class="product-title">To be Announced</h3>
+                    <p class="product-desc">Lorem Ipsum</p>
                     <div class="product-price">$40.00</div>
-                    <button class="btn add-to-cart">Add to Cart</button>
+                    <button class="btn add-to-cart">Order Now</button>
                 </div>
             </div>
 
@@ -544,10 +575,10 @@
                     <i class="fas fa-candy-cane"></i>
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Loves Bulldozer - Anniversary 2023</h3>
-                    <p class="product-desc">A Christmas special cake that brings joy and happiness to your celebrations.</p>
+                    <h3 class="product-title">To be Announced</h3>
+                    <p class="product-desc">Lorem Ipsum</p>
                     <div class="product-price">$100.00</div>
-                    <button class="btn add-to-cart">Add to Cart</button>
+                    <button class="btn add-to-cart">Order Now</button>
                 </div>
             </div>
         </div>
