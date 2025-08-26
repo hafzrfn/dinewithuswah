@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dine with Uswah - Cake Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #F9E3BA;
+            --secondary: #7e4e5c;
+            --accent: #F9E3BA;
+            --light: #fff8f8;
+            --dark: #3c2a2e;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 50px; /* Account for fixed navbar */
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            z-index: 1000;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger {
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding: 0.3rem;
+            width: 150px;
+        }
+
+        .search-box i {
+            color: #777;
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 3rem 1.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 0;
+        }
+
+        .header-logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: rgb(49, 48, 48);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: rgb(49, 48, 48);
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1, h2, h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-top: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-top: 3rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px dashed var(--primary);
+        }
+
+        .intro {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .product {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            height: 200px;
+            background: linear-gradient(45deg, #f8b5c1, #fad0c4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-desc {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .about {
+            background: linear-gradient(to right, #fff8f8, #fdeff2);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-box {
+                display: none;
+            }
+            
+            .nav-right {
+                gap: 1rem;
+            }
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .contact {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin: 3rem 0;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #fff8f8;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cart-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.5s ease;
+            z-index: 1001;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+        }
+        
+        /* Sidebar Menu */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 1002;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1001;
+        }
+        
+        .sidebar-overlay.active {
+            display: block;
+        }
+        
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-sidebar {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">Dine with Uswah</div>
+        </div>
+        <div class="nav-right">
+            <div class="search-box">
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="nav-icon">
+                <i class="fas fa-user"></i>
+                <span class="icon-label">Sign In</span>
+            </div>
+            <div class="nav-icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">3</span>
+                <span class="icon-label">Cart</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <div class="close-sidebar" id="close-sidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-birthday-cake"></i> All Products</a></li>
+            <li><a href="#"><i class="fas fa-gift"></i> Special Occasions</a></li>
+            <li><a href="#"><i class="fas fa-utensils"></i> Custom Orders</a></li>
+            <li><a href="#"><i class="fas fa-star"></i> Best Sellers</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="#"><i class="fas fa-phone"></i> Contact</a></li>
+            <li><a href="#"><i class="fas fa-book"></i> Recipes Blog</a></li>
+            <li><a href="#"><i class="fas fa-truck"></i> Delivery Info</a></li>
+            <li><a href="#"><i class="fas fa-question-circle"></i> FAQs</a></li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <header>
+        <div>
+            <img src="logodine.jpg" alt="">
+        </div>
+        <div class="header-logo">Dine with Uswah</div>
+        <div class="tagline">Crafted carefully with selected ingredients and refined recipes</div>
+    </header>
+
+    <div class="container">
+        <h1>Our Shop</h1>
+        <p class="intro">These unique cakes are made like a masterpiece filled with happiness. Each creation is crafted with love and the finest ingredients to bring joy to your special moments.</p>
+
+        <h2>Our Products</h2>
+        <div class="products">
+            <div class="product">
+                <div class="product-img">
+                    <i class="fas fa-cheese"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Domestic Milk Cake</h3>
+                    <p class="product-desc">Made with 2,000 miles of recycled vegetable ingredients for a fresh taste.</p>
+                    <div class="product-price">$25.00</div>
+                    <button class="btn add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-img">
+                    <i class="fas fa-birthday-cake"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Your Travel Cake</h3>
+                    <p class="product-desc">Since 2023, our commitment to market stores has made this a favorite.</p>
+                    <div class="product-price">$12.00</div>
+                    <button class="btn add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-img">
+                    <i class="fas fa-pie"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Fruit Pie</h3>
+                    <p class="product-desc">Food drops that have been eaten by the cooks during their meal.</p>
+                    <div class="product-price">$75.00</div>
+                    <button class="btn add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-img">
+                    <i class="fas fa-wine-bottle"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Fruit & Steward Bottles</h3>
+                    <p class="product-desc">After a meal before feeding a tablespoon of sugar, we can use this bottle as a whole.</p>
+                    <div class="product-price">$10.00</div>
+                    <button class="btn add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-img">
+                    <i class="fas fa-cake"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Chocolate Pulcher - Anniversary 2023</h3>
+                    <p class="product-desc">A delicious and decadent chocolate cake for your special celebrations.</p>
+                    <div class="product-price">$40.00</div>
+                    <button class="btn add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-img">
+                    <i class="fas fa-candy-cane"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Loves Bulldozer - Anniversary 2023</h3>
+                    <p class="product-desc">A Christmas special cake that brings joy and happiness to your celebrations.</p>
+                    <div class="product-price">$100.00</div>
+                    <button class="btn add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="about">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Our journey began with a passion for creating delightful cakes that bring people together. With years of experience and dedication to quality, we've become a beloved part of the community.</p>
+                    <p>Our cakes are made with the finest ingredients, carefully selected for their quality and flavor. Each cake is crafted with attention to detail and a touch of love.</p>
+                </div>
+                <div class="about-text">
+                    <p><strong>Commercial Items:</strong></p>
+                    <ul>
+                        <li>January of the year (2017): 4 months</li>
+                        <li>November 10th – 20th (2017): 6 months</li>
+                        <li>February 15th – 22th (2017): 7 months</li>
+                    </ul>
+                    <p><strong>Specialty Products:</strong> Blue wines and other unique offerings</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Address</h3>
+                    <p>123 Sweet Street, Dessert City</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>+1 (555) 123-CAKE</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>info@sweetdelights.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Hours</h3>
+                    <p>Mon-Sat: 9am-6pm<br>Sun: 10am-4pm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-notification" id="cartNotification">
+        <i class="fas fa-check-circle"></i>
+        <span>Item added to cart!</span>
+    </div>
+
+    <footer>
+        <p>© 2023 Dine with Uswah Cake Shop. All rights reserved.</p>
+        <p>Follow us on 
+            <a href="#" style="color: #f8b5c1;"><i class="fab fa-instagram"></i></a> 
+            <a href="#" style="color: #f8b5c1;"><i class="fab fa-facebook"></i></a> 
+            <a href="#" style="color: #f8b5c1;"><i class="fab fa-twitter"></i></a>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartNotification = document.getElementById('cartNotification');
+            const hamburger = document.getElementById('hamburger');
+            const sidebar = document.getElementById('sidebar');
+            const closeSidebar = document.getElementById('close-sidebar');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const cartIcon = document.getElementById('cart-icon');
+            let cartCount = 3;
+            
+            // Add to cart functionality
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = this.closest('.product');
+                    const productName = product.querySelector('.product-title').textContent;
+                    
+                    // Update cart count
+                    cartCount++;
+                    document.querySelector('.cart-count').textContent = cartCount;
+                    
+                    // Show notification
+                    cartNotification.style.display = 'flex';
+                    cartNotification.querySelector('span').textContent = `${productName} added to cart!`;
+                    
+                    // Hide notification after 3 seconds
+                    setTimeout(() => {
+                        cartNotification.style.display = 'none';
+                    }, 3000);
+                });
+            });
+            
+            // Sidebar functionality
+            hamburger.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                sidebarOverlay.classList.add('active');
+            });
+            
+            closeSidebar.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+            
+            sidebarOverlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
