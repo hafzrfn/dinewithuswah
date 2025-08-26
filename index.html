@@ -53,13 +53,6 @@
             align-items: center;
         }
 
-        .hamburger {
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-right: 1.5rem;
-            color: var(--secondary);
-        }
-
         .logonavbar {
             width: 70px;
         }
@@ -69,6 +62,13 @@
             align-items: center;
             gap: 1.5rem;
             font-size: 20px;
+        }
+
+        .nav-right a {
+            transition: color 0.2s;
+        }
+        .nav-right a:hover {
+            color: #31749e;
         }
 
         .nav-right button{
@@ -100,21 +100,6 @@
             color: var(--secondary);
             cursor: pointer;
             position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--accent);
-            color: white;
-            font-size: 0.7rem;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         /* Header */
@@ -317,22 +302,6 @@
             margin-top: 3rem;
         }
 
-        .cart-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--accent);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 50px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            display: none;
-            align-items: center;
-            gap: 10px;
-            animation: slideIn 0.5s ease;
-            z-index: 1001;
-        }
-
         .ordernow-button button {
             font-size: 1rem;
             background: #F9E3BA;
@@ -376,76 +345,6 @@
         .btn:hover {
             background: var(--secondary);
         }
-        
-        /* Sidebar Menu */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            transition: left 0.3s ease;
-            z-index: 1002;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-        
-        .sidebar.active {
-            left: 0;
-        }
-        
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 1001;
-        }
-        
-        .sidebar-overlay.active {
-            display: block;
-        }
-        
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .close-sidebar {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--secondary);
-        }
-        
-        .sidebar-menu {
-            list-style: none;
-        }
-        
-        .sidebar-menu li {
-            margin-bottom: 1rem;
-        }
-        
-        .sidebar-menu a {
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 1.1rem;
-            display: block;
-            padding: 0.5rem 0;
-            transition: color 0.3s ease;
-        }
-        
-        .sidebar-menu a:hover {
-            color: var(--accent);
-        }
 
         .order-modal-overlay {
             position: fixed;
@@ -453,31 +352,43 @@
             background: rgba(0,0,0,0.4);
             display: flex; align-items: center; justify-content: center;
             z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(.4,0,.2,1);
+        }
+        .order-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
         }
         .order-modal {
             background: #fff8f8;
             padding: 2rem;
             border-radius: 24px;
-            max-width: 520px;
+            max-width: 700px; /* Increased from 520px */
             width: 95%;
             box-shadow: 0 8px 32px rgba(0,0,0,0.18);
             position: relative;
             margin: 40px 0;
             max-height: 90vh;
             overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s cubic-bezier(.4,0,.2,1);
+            opacity: 0;
         }
-        .order-modal-close {
-            position: absolute;
-            top: 18px; right: 18px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #a66b2e;
-            background: #fff;
-            border-radius: 50%;
-            width: 32px; height: 32px;
-            display: flex; align-items: center; justify-content: center;
+        .order-modal-overlay.active .order-modal {
+            transform: scale(1);
+            opacity: 1;
         }
-        .order-modal input, .order-modal select, .order-modal textarea {
+        .order-modal h2 {
+            margin-top: 0.5rem; /* Reduced from default */
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--secondary);
+        }
+        .order-modal input,
+        .order-modal select,
+        .order-modal textarea {
+            width: 100%; /* Ensure fields fill modal width */
             margin-bottom: 1rem;
             padding: 0.5rem;
             border-radius: 8px;
@@ -485,36 +396,52 @@
             font-size: 1rem;
             background: #fff;
         }
-        .order-modal label {
-            font-weight: 500;
-            color: #a66b2e;
-            margin-bottom: 0.2rem;
-            display: block;
+
+        .product-details-modal {
+            max-width: 1000px;
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            align-items: center;
         }
-        .order-modal h3 {
-            color: #31749e;
-            margin-bottom: 1rem;
+
+        .product-details-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .product-details-content {
+            flex: 1;
+        }
+
+        .order-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
         }
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="nav-left">
-            <div class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-            <div class="logo"><img src="images/bgmremoved.png" class="logonavbar"></div>
-        </div>
+        <a href="#header" class="logo" style="display:inline-block;">
+            <img src="images/bgmremoved.png" class="logonavbar" alt="Dine with Uswah Logo">
+        </a>
         <div class="nav-right">
             <div class="home-tab">
-                <a href="" style="text-decoration: none; color: black">Home</a>
+                <a href="#header" style="text-decoration: none; color: black">Home</a>
             </div>
             <div class="product-tab">
-                <a href="" style="text-decoration: none; color: black">Our Products</a>
+                <a href="#our-products" style="text-decoration: none; color: black">Our Products</a>
             </div>
             <div class="aboutus-tab">
-                <a href="" style="text-decoration: none; color: black">Who We Are</a>
+                <a href="#about-us" style="text-decoration: none; color: black">Who We Are</a>
+            </div>
+            <div class="contactus-tab">
+                <a href="#contact-us" style="text-decoration: none; color: black">Contact Us</a>
             </div>
             <div class="ordernow-button">
                 <button>Order Now</button>
@@ -522,30 +449,7 @@
         </div>
     </nav>
 
-    <!-- Sidebar Menu -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h3>Menu</h3>
-            <div class="close-sidebar" id="close-sidebar">
-                <i class="fas fa-times"></i>
-            </div>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#"><i class="fas fa-birthday-cake"></i> All Products</a></li>
-            <li><a href="#"><i class="fas fa-gift"></i> Special Occasions</a></li>
-            <li><a href="#"><i class="fas fa-utensils"></i> Custom Orders</a></li>
-            <li><a href="#"><i class="fas fa-star"></i> Best Sellers</a></li>
-            <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
-            <li><a href="#"><i class="fas fa-phone"></i> Contact</a></li>
-            <li><a href="#"><i class="fas fa-book"></i> Recipes Blog</a></li>
-            <li><a href="#"><i class="fas fa-truck"></i> Delivery Info</a></li>
-            <li><a href="#"><i class="fas fa-question-circle"></i> FAQs</a></li>
-        </ul>
-    </div>
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
-    <header>
+    <header id="header">
         <div>
             <img src="images/bgmremoved.png" alt="">
         </div>
@@ -557,7 +461,7 @@
         <h1>Our Shop</h1>
         <p class="intro">These unique cakes are made like a masterpiece filled with happiness. Each creation is crafted with love and the finest ingredients to bring joy to your special moments.</p>
 
-        <h2>Our Products</h2>
+        <h2 id="our-products">Our Products</h2>
         <div class="products">
             <div class="product">
                 <div class="product-img">
@@ -567,7 +471,7 @@
                     <h3 class="product-title">Banana Pudding Tray</h3>
                     <p class="product-desc">Creamy banana pudding layered with fresh bananas and soft wafers, topped with a smooth cream for a classic, comforting taste.</p>
                     <div class="product-price">SGD 80.00</div>
-                    <button class="btn add-to-cart">Order Now</button>
+                    <button class="btn view-details">View Details</button>
                 </div>
             </div>
 
@@ -579,7 +483,7 @@
                     <h3 class="product-title">Banana Pudding Mini Pan</h3>
                     <p class="product-desc">Creamy banana pudding packed into convenient mini pans, layered with bananas and wafers for the perfect portion.</p>
                     <div class="product-price">SGD 5.00</div>
-                    <button class="btn add-to-cart">Order Now</button>
+                    <button class="btn view-details">View Details</button>
                 </div>
             </div>
 
@@ -590,8 +494,8 @@
                 <div class="product-content">
                     <h3 class="product-title">To be Announced</h3>
                     <p class="product-desc">Lorem Ipsum</p>
-                    <div class="product-price">$75.00</div>
-                    <button class="btn add-to-cart">Order Now</button>
+                    <div class="product-price">SGD -</div>
+                    <button class="btn view-details">View Details</button>
                 </div>
             </div>
 
@@ -602,8 +506,8 @@
                 <div class="product-content">
                     <h3 class="product-title">To be Announced</h3>
                     <p class="product-desc">Lorem Ipsum</p>
-                    <div class="product-price">$10.00</div>
-                    <button class="btn add-to-cart">Order Now</button>
+                    <div class="product-price">SGD -</div>
+                    <button class="btn view-details">View Details</button>
                 </div>
             </div>
 
@@ -614,8 +518,8 @@
                 <div class="product-content">
                     <h3 class="product-title">To be Announced</h3>
                     <p class="product-desc">Lorem Ipsum</p>
-                    <div class="product-price">$40.00</div>
-                    <button class="btn add-to-cart">Order Now</button>
+                    <div class="product-price">SGD -</div>
+                    <button class="btn view-details">View Details</button>
                 </div>
             </div>
 
@@ -626,13 +530,13 @@
                 <div class="product-content">
                     <h3 class="product-title">To be Announced</h3>
                     <p class="product-desc">Lorem Ipsum</p>
-                    <div class="product-price">$100.00</div>
-                    <button class="btn add-to-cart">Order Now</button>
+                    <div class="product-price">SGD -</div>
+                    <button class="btn view-details">View Details</button>
                 </div>
             </div>
         </div>
 
-        <div class="about">
+        <div class="about" id="about-us">
             <h2>About Us</h2>
             <div class="about-content">
                 <div class="about-text">
@@ -651,7 +555,7 @@
             </div>
         </div>
 
-        <div class="contact">
+        <div class="contact" id="contact-us">
             <h2>Contact Us</h2>
             <div class="contact-info">
                 <div class="contact-item">
@@ -678,15 +582,11 @@
         </div>
     </div>
 
-    <div class="cart-notification" id="cartNotification">
-        <i class="fas fa-check-circle"></i>
-        <span>Item added to cart!</span>
-    </div>
 
-    <div id="orderModal" class="order-modal-overlay" style="display:none;">
+    <div id="orderModal" class="order-modal-overlay">
         <div class="order-modal">
             <span class="order-modal-close" id="orderModalClose">&times;</span>
-            <h2 style="text-align:center;">Start sweetening up your life.</h2>
+            <h2 style="text-align:center;">A step away from sweetening up your life.</h2>
             <p style="text-align:center; color:#a66b2e;">
                 Please note: This is an Order Request Form, not a confirmed order. Once you submit your request, we'll review it and confirm all the details within 24 hours on business days.
             </p>
@@ -705,7 +605,7 @@
                 <input type="email" name="email" required style="width:100%;">
                 <label>Phone *</label>
                 <div style="display:flex; gap:0.5rem;">
-                    <select name="countryCode" required>
+                    <select name="countryCode" required style="flex:0 0 110px;">
                         <option value="+65">🇸🇬 +65</option>
                         <option value="+62">🇮🇩 +62</option>
                         <option value="+60">🇲🇾 +60</option>
@@ -755,6 +655,21 @@
         </div>
     </div>
 
+    <div id="productDetailsModal" class="order-modal-overlay">
+        <div class="order-modal" style="max-width:1000px; display:flex; flex-direction:row; gap:2rem; align-items:center;">
+            <span class="order-modal-close" id="productDetailsClose" style="position:absolute;top:18px;right:18px;">&times;</span>
+            <div id="productDetailsImage" style="flex:1; min-width:300px;">
+                <!-- Image will be injected here -->
+            </div>
+            <div style="flex:1;">
+                <h2 id="productDetailsName" style="margin-top:0.5rem;"></h2>
+                <p id="productDetailsDesc" style="margin-bottom:1rem;"></p>
+                <div id="productDetailsPrice" style="font-weight:bold; color:#31749e; font-size:1.3rem; margin-bottom:2rem;"></div>
+                <button class="btn" id="productDetailsOrderBtn" style="width:auto;">Order Now</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>© 2023 Dine with Uswah Cake Shop. All rights reserved.</p>
         <p>Follow us on 
@@ -766,74 +681,101 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const cartNotification = document.getElementById('cartNotification');
-            const hamburger = document.getElementById('hamburger');
-            const sidebar = document.getElementById('sidebar');
-            const closeSidebar = document.getElementById('close-sidebar');
-            const sidebarOverlay = document.getElementById('sidebar-overlay');
-            const cartIcon = document.getElementById('cart-icon');
-            const orderModal = document.getElementById('orderModal');
-            const orderModalClose = document.getElementById('orderModalClose');
-            let cartCount = 3;
-            
-            // Sidebar functionality
-            hamburger.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                sidebarOverlay.classList.add('active');
-            });
-            
-            closeSidebar.addEventListener('click', function() {
-                sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
-            });
-            
-            sidebarOverlay.addEventListener('click', function() {
-                sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
-            });
-            
             // Smooth scroll for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    if (this.getAttribute('href') === '#header') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
             
             // Order modal functionality
+            const orderModal = document.getElementById('orderModal');
+            const orderModalClose = document.getElementById('orderModalClose');
             const orderNowButton = document.querySelector('.ordernow-button button');
+
+            function openOrderModal() {
+                orderModal.classList.add('active');
+            }
+            function closeOrderModal() {
+                orderModal.classList.remove('active');
+            }
+
             orderNowButton.addEventListener('click', function() {
-                orderModal.style.display = 'flex';
+                openOrderModal();
             });
-            
             orderModalClose.addEventListener('click', function() {
-                orderModal.style.display = 'none';
+                closeOrderModal();
             });
-            
             window.addEventListener('click', function(event) {
                 if (event.target === orderModal) {
-                    orderModal.style.display = 'none';
+                    closeOrderModal();
                 }
             });
-            
+
             // Pickup/Delivery radio buttons
             const pickupRadio = document.getElementById('pickupRadio');
             const deliveryRadio = document.getElementById('deliveryRadio');
             const addressField = document.getElementById('addressField');
-            
+
             pickupRadio.addEventListener('change', function() {
                 if (this.checked) {
                     addressField.style.display = 'none';
                 }
             });
-            
+
             deliveryRadio.addEventListener('change', function() {
                 if (this.checked) {
                     addressField.style.display = 'block';
                 }
+            });
+
+            // Product Details Modal
+            const productDetailsModal = document.getElementById('productDetailsModal');
+            const productDetailsClose = document.getElementById('productDetailsClose');
+            const productDetailsOrderBtn = document.getElementById('productDetailsOrderBtn');
+
+            function openProductDetailsModal(imgSrc, name, desc, price) {
+                document.getElementById('productDetailsImage').innerHTML =
+                    `<img src="${imgSrc}" alt="${name}" style="width:100%;border-radius:18px;max-height:400px;object-fit:cover;">`;
+                document.getElementById('productDetailsName').textContent = name;
+                document.getElementById('productDetailsDesc').textContent = desc;
+                document.getElementById('productDetailsPrice').textContent = price;
+                productDetailsModal.classList.add('active');
+            }
+            function closeProductDetailsModal() {
+                productDetailsModal.classList.remove('active');
+            }
+
+            productDetailsClose.addEventListener('click', closeProductDetailsModal);
+            window.addEventListener('click', function(event) {
+                if (event.target === productDetailsModal) {
+                    closeProductDetailsModal();
+                }
+            });
+
+            // Open order modal from product details modal
+            productDetailsOrderBtn.addEventListener('click', function() {
+                closeProductDetailsModal();
+                openOrderModal();
+            });
+
+            // Attach to all view-details buttons
+            document.querySelectorAll('.view-details').forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    const product = btn.closest('.product');
+                    const img = product.querySelector('img') ? product.querySelector('img').src : '';
+                    const name = product.querySelector('.product-title').textContent;
+                    const desc = product.querySelector('.product-desc').textContent;
+                    const price = product.querySelector('.product-price').textContent;
+                    openProductDetailsModal(img, name, desc, price);
+                });
             });
         });
     </script>
