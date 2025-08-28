@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dine with Uswah - Cake Shop</title>
+    <link rel="icon" type="image/png" href="images/logodine.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @font-face {
@@ -65,10 +66,12 @@
         }
 
         .nav-right a {
-            transition: color 0.2s;
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s cubic-bezier(.4,0,.2,1);
         }
         .nav-right a:hover {
-            color: #31749e;
+            color: var(--secondary);
         }
 
         .nav-right button{
@@ -432,16 +435,16 @@
         </a>
         <div class="nav-right">
             <div class="home-tab">
-                <a href="#header" style="text-decoration: none; color: black">Home</a>
+                <a href="#header" style="text-decoration: none;">Home</a>
             </div>
             <div class="product-tab">
-                <a href="#our-products" style="text-decoration: none; color: black">Our Products</a>
+                <a href="#our-products" style="text-decoration: none;">Our Products</a>
             </div>
             <div class="aboutus-tab">
-                <a href="#about-us" style="text-decoration: none; color: black">Who We Are</a>
+                <a href="#about-us" style="text-decoration: none;">Who We Are</a>
             </div>
             <div class="contactus-tab">
-                <a href="#contact-us" style="text-decoration: none; color: black">Contact Us</a>
+                <a href="#contact-us" style="text-decoration: none;">Contact Us</a>
             </div>
             <div class="ordernow-button">
                 <button>Order Now</button>
@@ -590,7 +593,7 @@
             <p style="text-align:center; color:#a66b2e;">
                 Please note: This is an Order Request Form, not a confirmed order. Once you submit your request, we'll review it and confirm all the details within 24 hours on business days.
             </p>
-            <form id="orderForm" style="margin-top:2rem;">
+            <form id="orderForm" style="margin-top:2rem;" action="https://api.web3forms.com/submit" method="POST">
                 <div style="display:flex; gap:1rem;">
                     <div style="flex:1;">
                         <label>First Name *</label>
@@ -651,6 +654,7 @@
                 <p style="color:#a66b2e; margin-top:1rem;">
                     By submitting this form, you acknowledge that this is an order request, not a confirmed order.
                 </p>
+                <input type="hidden" name="access_key" value="2ad2ce30-a789-4ad2-a901-9af0bf684145">
             </form>
         </div>
     </div>
