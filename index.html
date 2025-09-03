@@ -5,427 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dine with Uswah - Cake Shop</title>
     <link rel="icon" type="image/png" href="images/logodine.jpg">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @font-face {
-            font-family: 'CustomFont';
-            src: url(fonts/CormorantGaramond-Medium.ttf)
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'CustomFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #F9E3BA;
-            --secondary: #31749e;
-            --accent: #1E3A4C;
-            --light: #fff8f8;
-            --dark: #3c2a2e;
-        }
-
-        body {
-            background-color: #fff6e7;
-            color: var(--dark);
-            line-height: 1.6;
-            padding-top: 50px; /* Account for fixed navbar */
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #fff6e7;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 2rem;
-            z-index: 1000;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-        }
-
-        .logonavbar {
-            width: 70px;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            font-size: 20px;
-        }
-
-        .nav-right a {
-            color: black;
-            text-decoration: none;
-            transition: color 0.3s cubic-bezier(.4,0,.2,1);
-        }
-        .nav-right a:hover {
-            color: var(--secondary);
-        }
-
-        .nav-right button{
-            
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: #f5f5f5;
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-        }
-
-        .search-box input {
-            border: none;
-            background: transparent;
-            outline: none;
-            padding: 0.3rem;
-            width: 150px;
-        }
-
-        .search-box i {
-            color: #777;
-        }
-
-        .nav-icon {
-            font-size: 1.3rem;
-            color: var(--secondary);
-            cursor: pointer;
-            position: relative;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #F9E3BA, #fdd58b);
-            padding: 3rem 1.5rem 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-        }
-
-        .header-logo {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: rgb(49, 48, 48);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            font-style: italic;
-            color: rgb(49, 48, 48);
-            font-size: 1.4rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        h1, h2, h3 {
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.3rem;
-            margin-top: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h1:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-top: 3rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px dashed var(--primary);
-        }
-
-        .intro {
-            text-align: center;
-            margin: 2rem 0;
-            font-size: 1.5rem;
-            line-height: 1.8;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .product {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .product-img {
-            height: 200px;
-            background: linear-gradient(45deg, #F9E3BA, #F9E3BA);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-
-        .bananapuddingimg {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-content {
-
-            padding: 1.5rem;
-            
-        }
-
-        .product-title {
-            font-size: 1.6rem;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .product-desc {
-            color: #666;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .product-price {
-            font-weight: bold;
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-
-        .about {
-            background: linear-gradient(to right, #F9E3BA, #F9E3BA);
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            margin: 3rem 0;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .search-box {
-                display: none;
-            }
-            
-            .nav-right {
-                gap: 1rem;
-            }
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-        }
-
-        .contact {
-            background: white;
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            margin: 3rem 0;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            text-align: center;
-            padding: 1.5rem;
-            background: #F9E3BA;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .contact-item i {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        .ordernow-button button {
-            font-size: 1rem;
-            background: #F9E3BA;
-            color: black;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-
-        .ordernow-button button:hover {
-            background: var(--secondary);
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s ease;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        .btn:hover {
-            background: var(--secondary);
-        }
-
-        .order-modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.4);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s cubic-bezier(.4,0,.2,1);
-        }
-        .order-modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .order-modal {
-            background: #fff8f8;
-            padding: 2rem;
-            border-radius: 24px;
-            max-width: 700px; /* Increased from 520px */
-            width: 95%;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-            position: relative;
-            margin: 40px 0;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.95);
-            transition: transform 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s cubic-bezier(.4,0,.2,1);
-            opacity: 0;
-        }
-        .order-modal-overlay.active .order-modal {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .order-modal h2 {
-            margin-top: 0.5rem; /* Reduced from default */
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--secondary);
-        }
-        .order-modal input,
-        .order-modal select,
-        .order-modal textarea {
-            width: 100%; /* Ensure fields fill modal width */
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            border-radius: 8px;
-            border: 1px solid #d1bfa3;
-            font-size: 1rem;
-            background: #fff;
-        }
-
-        .product-details-modal {
-            max-width: 1000px;
-            display: flex;
-            flex-direction: row;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .product-details-image {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .product-details-content {
-            flex: 1;
-        }
-
-        .order-modal-close {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--secondary);
-        }
-    </style>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -436,6 +18,9 @@
         <div class="nav-right">
             <div class="home-tab">
                 <a href="#header" style="text-decoration: none;">Home</a>
+            </div>
+            <div class="whatsnew-tab">
+                <a href="#whats-new" style="text-decoration: none;">What's New</a>
             </div>
             <div class="product-tab">
                 <a href="#our-products" style="text-decoration: none;">Our Products</a>
@@ -450,7 +35,28 @@
                 <button>Order Now</button>
             </div>
         </div>
+        <!-- Hamburger icon (top right, visible on mobile) -->
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
     </nav>
+
+<!-- Hamburger icon (visible on mobile) -->
+<div class="hamburger" id="hamburger" style="display:none;">
+    <i class="fas fa-bars"></i>
+</div>
+
+<!-- Mobile navigation sidebar -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="mobile-nav" id="mobileNav">
+    <span class="close-mobile-nav" id="closeMobileNav">&times;</span>
+    <a href="#header">Home</a>
+    <a href="#whats-new">What's New</a>
+    <a href="#our-products">Our Products</a>
+    <a href="#about-us">Who We Are</a>
+    <a href="#contact-us">Contact Us</a>
+    <button class="btn" id="mobileOrderNow">Order Now</button>
+</div>
 
     <header id="header">
         <div>
@@ -462,7 +68,22 @@
 
     <div class="container">
         <h1>Our Shop</h1>
-        <p class="intro">These unique cakes are made like a masterpiece filled with happiness. Each creation is crafted with love and the finest ingredients to bring joy to your special moments.</p>
+        <p class="intro">At Dine with Uswah, we are a Muslim-owned, home-based bakery passionate about sharing our signature banana pudding and other homemade delights. Every dessert is thoughtfully prepared, reflecting both tradition and a commitment to quality.</p>
+
+        <h2 id="whats-new">What's New</h2>
+    <div class="whats-new-section">
+        <div class="update-card">
+            <div class="update-date">Sep 1, 2025</div>
+            <div class="update-title">Banana Pudding Mini Pan Launched!</div>
+            <div class="update-desc">Our new mini pan version of our signature banana pudding is now available. Perfect for sharing or solo treats!</div>
+        </div>
+        <div class="update-card">
+            <div class="update-date">Sep 1, 2025</div>
+            <div class="update-title">Introducing Banana Pudding Trays</div>
+            <div class="update-desc">Our first product onto the site. Enjoy the taste of our signature Banana Puddings!</div>
+        </div>
+        <!-- Add more updates as needed -->
+    </div>
 
         <h2 id="our-products">Our Products</h2>
         <div class="products">
@@ -484,37 +105,14 @@
                 </div>
                 <div class="product-content">
                     <h3 class="product-title">Banana Pudding Mini Pan</h3>
-                    <p class="product-desc">Creamy banana pudding packed into convenient mini pans, layered with bananas and wafers for the perfect portion.</p>
+                    <p class="product-desc">Creamy banana pudding packed into convenient mini pans, layered with bananas and wafers for the perfect portion. <br>
+                        (Minimum order of 4 pans)</p>
                     <div class="product-price">SGD 5.00</div>
                     <button class="btn view-details">View Details</button>
                 </div>
             </div>
 
-            <div class="product">
-                <div class="product-img">
-                    <i class="fas fa-pie"></i>
-                </div>
-                <div class="product-content">
-                    <h3 class="product-title">To be Announced</h3>
-                    <p class="product-desc">Lorem Ipsum</p>
-                    <div class="product-price">SGD -</div>
-                    <button class="btn view-details">View Details</button>
-                </div>
-            </div>
-
-            <div class="product">
-                <div class="product-img">
-                    <i class="fas fa-wine-bottle"></i>
-                </div>
-                <div class="product-content">
-                    <h3 class="product-title">To be Announced</h3>
-                    <p class="product-desc">Lorem Ipsum</p>
-                    <div class="product-price">SGD -</div>
-                    <button class="btn view-details">View Details</button>
-                </div>
-            </div>
-
-            <div class="product">
+            <div class="product unavailable">
                 <div class="product-img">
                     <i class="fas fa-cake"></i>
                 </div>
@@ -526,9 +124,33 @@
                 </div>
             </div>
 
-            <div class="product">
+            <div class="product unavailable">
                 <div class="product-img">
-                    <i class="fas fa-candy-cane"></i>
+                    <i class="fas fa-cake"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">To be Announced</h3>
+                    <p class="product-desc">Lorem Ipsum</p>
+                    <div class="product-price">SGD -</div>
+                    <button class="btn view-details">View Details</button>
+                </div>
+            </div>
+
+            <div class="product unavailable">
+                <div class="product-img">
+                    <i class="fas fa-cake"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">To be Announced</h3>
+                    <p class="product-desc">Lorem Ipsum</p>
+                    <div class="product-price">SGD -</div>
+                    <button class="btn view-details">View Details</button>
+                </div>
+            </div>
+
+            <div class="product unavailable">
+                <div class="product-img">
+                    <i class="fas fa-cake"></i>
                 </div>
                 <div class="product-content">
                     <h3 class="product-title">To be Announced</h3>
@@ -543,17 +165,11 @@
             <h2>About Us</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Our journey began with a passion for creating delightful cakes that bring people together. With years of experience and dedication to quality, we've become a beloved part of the community.</p>
-                    <p>Our cakes are made with the finest ingredients, carefully selected for their quality and flavor. Each cake is crafted with attention to detail and a touch of love.</p>
-                </div>
-                <div class="about-text">
-                    <p><strong>Commercial Items:</strong></p>
-                    <ul>
-                        <li>January of the year (2017): 4 months</li>
-                        <li>November 10th – 20th (2017): 6 months</li>
-                        <li>February 15th – 22th (2017): 7 months</li>
-                    </ul>
-                    <p><strong>Specialty Products:</strong> Blue wines and other unique offerings</p>
+                    <p style="text-align: center; margin: 0 auto; font-size: 20px; font-weight: 600;">
+                        Welcome to Dine with Uswah - a Muslim-owned, home-based bakery dedicated to bringing you delightful homemade treats. Our passion lies in creating desserts that not only taste amazing but also reflect the warmth of tradition and the highest standards of quality.<br>
+                        From our signature banana pudding to a variety of other homemade specialties, every item is crafted with care, love, and attention to detail. We believe that desserts should be more than just sweet—they should create moments of joy and connection.<br>
+                        Thank you for choosing us to be part of your celebrations and everyday indulgence!
+                    </p>   
                 </div>
             </div>
         </div>
@@ -564,23 +180,23 @@
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <h3>Address</h3>
-                    <p>123 Sweet Street, Dessert City</p>
+                    <p>Blk 364, Tampines St. 34, 520364</p>
                 </div>
                 <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <h3>Phone</h3>
-                    <p>+1 (555) 123-CAKE</p>
+                    <i class="fab fa-instagram"></i>
+                    <h3>DM us on Instagram!</h3>
+                    <p>@dinewithuswah</p>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
                     <h3>Email</h3>
-                    <p>info@sweetdelights.com</p>
+                    <p>theuwaismnsr@gmail.com</p>
                 </div>
-                <div class="contact-item">
+                <!--<div class="contact-item">
                     <i class="fas fa-clock"></i>
                     <h3>Hours</h3>
                     <p>Mon-Sat: 9am-6pm<br>Sun: 10am-4pm</p>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
@@ -594,12 +210,12 @@
                 Please note: This is an Order Request Form, not a confirmed order. Once you submit your request, we'll review it and confirm all the details within 24 hours on business days.
             </p>
             <form id="orderForm" style="margin-top:2rem;" action="https://api.web3forms.com/submit" method="POST">
-                <div style="display:flex; gap:1rem;">
-                    <div style="flex:1;">
+                <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                    <div style="flex:1; min-width:180px;">
                         <label>First Name *</label>
                         <input type="text" name="firstName" required style="width:100%;">
                     </div>
-                    <div style="flex:1;">
+                    <div style="flex:1; min-width:180px;">
                         <label>Last Name *</label>
                         <input type="text" name="lastName" required style="width:100%;">
                     </div>
@@ -607,14 +223,14 @@
                 <label>Email *</label>
                 <input type="email" name="email" required style="width:100%;">
                 <label>Phone *</label>
-                <div style="display:flex; gap:0.5rem;">
-                    <select name="countryCode" required style="flex:0 0 110px;">
-                        <option value="+65">🇸🇬 +65</option>
-                        <option value="+62">🇮🇩 +62</option>
-                        <option value="+60">🇲🇾 +60</option>
-                        <option value="+1">🇺🇸 +1</option>
-                    </select>
-                    <input type="tel" name="phone" required style="flex:1;">
+                <div style="display: flex; gap: 0.5rem; align-items: stretch;">
+                    <div style="display: flex; align-items: center; background: #fff; border: 2px solid #31749e; border-radius: 8px; padding: 0 0.7rem; min-width: 140px; max-width: 150px; height: 42px; box-shadow: 0 2px 6px rgba(49,116,158,0.2);">
+                        <span style="font-size: 1.1rem; margin-right: 4px; color: #31749e;">🌍</span>
+                        <select name="countryCode" required style="border: none; background: transparent; font-size: 1rem; outline: none; width: 100px; height: 100%; cursor: pointer; color: #31749e; font-weight: 600;">
+                            <option value="+65" selected>SG +65</option>
+                        </select>
+                    </div>
+                    <input type="tel" name="phone" required style="flex:1; font-size:1rem; padding:0.4rem; border-radius:8px; border:1px solid #d1bfa3; height:42px;" maxlength="8" pattern="[0-9]{8}" title="Please enter an 8-digit Singapore phone number">
                 </div>
                 <label>Pick up or Delivery *</label>
                 <div style="display:flex; gap:2rem; align-items:center;">
@@ -627,30 +243,55 @@
                         <label for="deliveryRadio" style="margin-left:8px;">Delivery</label>
                     </div>
                 </div>
+                <div style="margin: 0.5rem 0 1rem 0; color: #a66b2e; font-size: 1rem;">
+                    Delivery – Please note our minimum order value for delivery is SGD 20.
+                </div>
                 <div id="addressField" style="display:none;">
                     <label>Address *</label>
                     <input type="text" name="address" style="width:100%;">
+                </div>
+                <!-- Cooler Bag Section -->
+                <label>Cooler Bag *</label>
+                <div style="display:flex; gap:2rem; align-items:center;">
+                    <div style="display:flex; align-items:center;">
+                        <input type="radio" name="coolerBag" value="yes" id="coolerBagYes" required>
+                        <label for="coolerBagYes" style="margin-left:8px;">Yes</label>
+                    </div>
+                    <div style="display:flex; align-items:center;">
+                        <input type="radio" name="coolerBag" value="no" id="coolerBagNo">
+                        <label for="coolerBagNo" style="margin-left:8px;">No</label>
+                    </div>
                 </div>
                 <label>Date / Time *</label>
                 <input type="datetime-local" name="datetime" required style="width:100%;">
                 <hr style="margin:2rem 0;">
                 <h3>Order Cakes</h3>
-                <div style="display:flex; gap:1rem;">
-                    <div style="flex:2;">
+                <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                    <div style="flex:2; min-width:180px;">
                         <label>Flavor *</label>
-                        <select name="cakeFlavor" required style="width:100%;">
+                        <select name="cakeFlavor" id="cakeFlavor" required style="width:100%;">
                             <option value="Banana Pudding Tray">Banana Pudding Tray</option>
-                            <option value="Banana Pudding Mini Pan">Banana Pudding Mini Pan</option>
+                            <option value="Banana Pudding Mini Pan">Banana Pudding Mini Pan (Min. 4 pans for Delivery)</option>
                         </select>
                     </div>
-                    <div style="flex:1;">
+                    <div style="flex:1; min-width:120px;">
                         <label>Quantity *</label>
-                        <input type="number" name="cakeQuantity" min="1" required style="width:100%;">
+                        <input type="number" name="cakeQuantity" id="cakeQuantity" min="1" required style="width:100%;">
                     </div>
                 </div>
                 <label>Comment or Message *</label>
                 <textarea name="comment" required style="width:100%;height:100px;"></textarea>
                 <button type="submit" class="btn" style="width:100%;margin-top:1rem;">Submit Order Request</button>
+                <div id="orderLoading" style="display:none; text-align:center; margin-bottom:1rem;">
+                    <span class="loader" style="display:inline-block; vertical-align:middle; margin-right:8px;">
+                        <svg width="22" height="22" viewBox="0 0 50 50">
+                            <circle cx="25" cy="25" r="20" fill="none" stroke="#31749e" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.4 31.4" transform="rotate(-90 25 25)">
+                                <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </span>
+                    <span style="font-size:1.1rem; color:#31749e;">Submitting order request...</span>
+                </div>
                 <p style="color:#a66b2e; margin-top:1rem;">
                     By submitting this form, you acknowledge that this is an order request, not a confirmed order.
                 </p>
@@ -675,113 +316,12 @@
     </div>
 
     <footer>
-        <p>© 2023 Dine with Uswah Cake Shop. All rights reserved.</p>
-        <p>Follow us on 
+        <p>© 2025 Dine with Uswah Cake Shop. All rights reserved.</p>
+        <!--<p>Follow us on 
             <a href="#" style="color: #f8b5c1;"><i class="fab fa-instagram"></i></a> 
             <a href="#" style="color: #f8b5c1;"><i class="fab fa-facebook"></i></a> 
             <a href="#" style="color: #f8b5c1;"><i class="fab fa-twitter"></i></a>
-        </p>
+        </p>-->
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.getAttribute('href') === '#header') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Order modal functionality
-            const orderModal = document.getElementById('orderModal');
-            const orderModalClose = document.getElementById('orderModalClose');
-            const orderNowButton = document.querySelector('.ordernow-button button');
-
-            function openOrderModal() {
-                orderModal.classList.add('active');
-            }
-            function closeOrderModal() {
-                orderModal.classList.remove('active');
-            }
-
-            orderNowButton.addEventListener('click', function() {
-                openOrderModal();
-            });
-            orderModalClose.addEventListener('click', function() {
-                closeOrderModal();
-            });
-            window.addEventListener('click', function(event) {
-                if (event.target === orderModal) {
-                    closeOrderModal();
-                }
-            });
-
-            // Pickup/Delivery radio buttons
-            const pickupRadio = document.getElementById('pickupRadio');
-            const deliveryRadio = document.getElementById('deliveryRadio');
-            const addressField = document.getElementById('addressField');
-
-            pickupRadio.addEventListener('change', function() {
-                if (this.checked) {
-                    addressField.style.display = 'none';
-                }
-            });
-
-            deliveryRadio.addEventListener('change', function() {
-                if (this.checked) {
-                    addressField.style.display = 'block';
-                }
-            });
-
-            // Product Details Modal
-            const productDetailsModal = document.getElementById('productDetailsModal');
-            const productDetailsClose = document.getElementById('productDetailsClose');
-            const productDetailsOrderBtn = document.getElementById('productDetailsOrderBtn');
-
-            function openProductDetailsModal(imgSrc, name, desc, price) {
-                document.getElementById('productDetailsImage').innerHTML =
-                    `<img src="${imgSrc}" alt="${name}" style="width:100%;border-radius:18px;max-height:400px;object-fit:cover;">`;
-                document.getElementById('productDetailsName').textContent = name;
-                document.getElementById('productDetailsDesc').textContent = desc;
-                document.getElementById('productDetailsPrice').textContent = price;
-                productDetailsModal.classList.add('active');
-            }
-            function closeProductDetailsModal() {
-                productDetailsModal.classList.remove('active');
-            }
-
-            productDetailsClose.addEventListener('click', closeProductDetailsModal);
-            window.addEventListener('click', function(event) {
-                if (event.target === productDetailsModal) {
-                    closeProductDetailsModal();
-                }
-            });
-
-            // Open order modal from product details modal
-            productDetailsOrderBtn.addEventListener('click', function() {
-                closeProductDetailsModal();
-                openOrderModal();
-            });
-
-            // Attach to all view-details buttons
-            document.querySelectorAll('.view-details').forEach((btn) => {
-                btn.addEventListener('click', function() {
-                    const product = btn.closest('.product');
-                    const img = product.querySelector('img') ? product.querySelector('img').src : '';
-                    const name = product.querySelector('.product-title').textContent;
-                    const desc = product.querySelector('.product-desc').textContent;
-                    const price = product.querySelector('.product-price').textContent;
-                    openProductDetailsModal(img, name, desc, price);
-                });
-            });
-        });
-    </script>
 </body>
 </html>
